@@ -1,6 +1,24 @@
-// Weather APP
+// Development Information
+// Primary Developer Contact Information:
+// Sebastian Remar
+// Minor Computer Science
+// Statler College of Engineering & Mineral Resources
+// Student at the department of Aerospace/Mechanical Engineer
+// West Virginia University (WVU)
+// rsr0016@mix.wvu.edu
+// Development History
+// Date                   Developer        Comments
+// -------------        -------------      ------------------------------------------------------------
+// March 03, 2021    Sebastian Remar       First project using an API. Pretty satisfied with the results. 
+
+
+// ================= WEATHER APP ================ //
+// Creating Object weather 
 let weather = {
+    // Api key from open weather
     "apiKey" : "bed1c2c15ab7fffee3a0b9265b3ea6bb",
+
+    // Fetching data from API
     fetchWeather: function(city){
         fetch("http://api.openweathermap.org/data/2.5/weather?q=" 
         + city 
@@ -16,6 +34,7 @@ let weather = {
         })
         .then((data) => this.displayWeather(data));
     },
+    // Displaying Weather data
     displayWeather:function(data){
         const { name } = data;
         const { icon, description } = data.weather[0];
@@ -23,13 +42,14 @@ let weather = {
         const { speed } = data.wind;
         console.log(name, icon, description, temp, humidity, speed);
         document.querySelector(".city").innerText = "Weather in " + name;
+        // Extracting icon from API
         document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
         document.querySelector(".description").innerText = description;
         document.querySelector(".temp").innerText = Math.trunc(temp) + " °C";
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText = "Wind speed: " + speed + " km/hr";
-
         document.querySelector(".weather").classList.remove("loading");
+        // Attempting to display an image related to user's input
         document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name +"')";
 
     },
@@ -41,12 +61,13 @@ let weather = {
 document.querySelector(".search button").addEventListener("click",function(){
     weather.search();
 });
-
+// Object geoCode
 let geoCode = {
+    // Reverse code with user's latitude and longitude
     reverseGeocode : function (latitude,longitude){
         var apikey = '58c1615923894eadb14d3b889f04efbd';
         var api_url = 'https://api.opencagedata.com/geocode/v1/json'
-
+        // Code not written by developer, used from API. 
         var request_url = api_url
             + '?'
             + 'key=' + apikey
@@ -63,6 +84,7 @@ let geoCode = {
         if (request.status === 200){ 
         // Success!
             var data = JSON.parse(request.responseText);
+            // If there is not a city specified, try to look if there is a county instead. 
             if(data.results[0].components.city == undefined){
                 weather.fetchWeather(data.results[0].components.county);
             } else{
@@ -92,6 +114,7 @@ let geoCode = {
             navigator.geolocation.getCurrentPosition(success,console.error);
         } 
         else{
+            // If cannot access user location, display weather at Lima instead. 
             weather.fetchWeather("Lima");
         }
     }    
