@@ -16,7 +16,7 @@
 // Creating Object weather 
 let weather = {
     // Api key from open weather
-    "apiKey" : "bed1c2c15ab7fffee3a0b9265b3ea6bb",
+    "apiKey" : "Enter your key API key here!",
 
     // Fetching data from API
     fetchWeather: function(city){
