@@ -1,9 +1,9 @@
 // Development Information
 // Primary Developer Contact Information:
 // Sebastian Remar
-// Minor Computer Science
 // Statler College of Engineering & Mineral Resources
 // Student at the department of Aerospace/Mechanical Engineer
+// Minor Computer Science
 // West Virginia University (WVU)
 // rsr0016@mix.wvu.edu
 // Development History
@@ -16,7 +16,7 @@
 // Creating Object weather 
 let weather = {
     // Api key from open weather
-    "apiKey" : "Enter your key API key here!",
+    "apiKey" : "Enter API Key",
 
     // Fetching data from API
     fetchWeather: function(city){
@@ -65,7 +65,7 @@ document.querySelector(".search button").addEventListener("click",function(){
 let geoCode = {
     // Reverse code with user's latitude and longitude
     reverseGeocode : function (latitude,longitude){
-        var apikey = '58c1615923894eadb14d3b889f04efbd';
+        var apikey = 'Enter API key';
         var api_url = 'https://api.opencagedata.com/geocode/v1/json'
         // Code not written by developer, used from API. 
         var request_url = api_url
